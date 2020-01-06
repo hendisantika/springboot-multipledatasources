@@ -1,6 +1,10 @@
 package com.hendisantika.springbootmultipledatasources.config;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -20,4 +24,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         transactionManagerRef = "memberTransactionManager"
 )
 public class MemberDataSourceConfiguration {
+    @Bean
+    @Primary
+    @ConfigurationProperties("app.datasource.member")
+    public DataSourceProperties memberDataSourceProperties() {
+        return new DataSourceProperties();
+    }
 }
