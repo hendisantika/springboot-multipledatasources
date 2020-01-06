@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class SpringbootMultipledatasourcesApplicationTests {
+public class SpringbootMultipledatasourcesApplicationTests {
 
     /*
      * We will be using mysql databases we configured in our properties file for our tests
