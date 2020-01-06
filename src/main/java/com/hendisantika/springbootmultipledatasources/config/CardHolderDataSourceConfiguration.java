@@ -1,5 +1,8 @@
 package com.hendisantika.springbootmultipledatasources.config;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -17,4 +20,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         entityManagerFactoryRef = "cardHolderEntityManagerFactory",
         transactionManagerRef = "cardHolderTransactionManager")
 public class CardHolderDataSourceConfiguration {
+    @Bean
+    @ConfigurationProperties("app.datasource.cardholder")
+    public DataSourceProperties cardHolderDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
 }
