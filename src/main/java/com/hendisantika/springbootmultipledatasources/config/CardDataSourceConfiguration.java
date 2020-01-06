@@ -1,11 +1,14 @@
 package com.hendisantika.springbootmultipledatasources.config;
 
+import com.hendisantika.springbootmultipledatasources.model.card.Card;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
 
@@ -35,5 +38,14 @@ public class CardDataSourceConfiguration {
     public DataSource cardDataSource() {
         return cardDataSourceProperties().initializeDataSourceBuilder()
                 .type(BasicDataSource.class).build();
+    }
+
+    @Bean(name = "cardEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean cardEntityManagerFactory(
+            EntityManagerFactoryBuilder builder) {
+        return builder
+                .dataSource(cardDataSource())
+                .packages(Card.class)
+                .build();
     }
 }
