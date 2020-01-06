@@ -71,4 +71,11 @@ class SpringbootMultipledatasourcesApplicationTests {
         assertTrue(cardHolderFromDb.isPresent());
     }
 
+    @Test
+    public void shouldSaveCardToCardDB() {
+        Card savedCard = cardRepository.save(card);
+        Optional<Card> cardFromDb = cardRepository.findById(savedCard.getId());
+        assertTrue(cardFromDb.isPresent());
+    }
+
 }
