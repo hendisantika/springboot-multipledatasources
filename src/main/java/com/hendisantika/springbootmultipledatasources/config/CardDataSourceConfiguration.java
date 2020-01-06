@@ -1,10 +1,13 @@
 package com.hendisantika.springbootmultipledatasources.config;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import javax.sql.DataSource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,5 +28,12 @@ public class CardDataSourceConfiguration {
     @ConfigurationProperties("app.datasource.card")
     public DataSourceProperties cardDataSourceProperties() {
         return new DataSourceProperties();
+    }
+
+    @Bean
+    @ConfigurationProperties("app.datasource.card.configuration")
+    public DataSource cardDataSource() {
+        return cardDataSourceProperties().initializeDataSourceBuilder()
+                .type(BasicDataSource.class).build();
     }
 }
