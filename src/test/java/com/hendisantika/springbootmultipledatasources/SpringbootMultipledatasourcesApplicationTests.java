@@ -7,10 +7,15 @@ import com.hendisantika.springbootmultipledatasources.repository.card.CardReposi
 import com.hendisantika.springbootmultipledatasources.repository.cardholder.CardHolderRepository;
 import com.hendisantika.springbootmultipledatasources.repository.member.MemberRepository;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,6 +55,13 @@ class SpringbootMultipledatasourcesApplicationTests {
         card.setExpirationYear(2020);
         card.setName(member.getName());
 
+    }
+
+    @Test
+    public void shouldSaveMemberToMemberDB() {
+        Member savedMember = memberRepository.save(member);
+        Optional<Member> memberFromDb = memberRepository.findById(savedMember.getId());
+        assertTrue(memberFromDb.isPresent());
     }
 
 }
