@@ -20,7 +20,7 @@
 
 ![Add New Card](img/newCard.png "Add New Card")
 
-**Get All Carda**
+**Get All Cards**
 
 ![Get All Card](img/allCards.png "Get All Card")
 
