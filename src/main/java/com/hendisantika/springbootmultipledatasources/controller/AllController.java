@@ -2,6 +2,7 @@ package com.hendisantika.springbootmultipledatasources.controller;
 
 import com.hendisantika.springbootmultipledatasources.model.card.Card;
 import com.hendisantika.springbootmultipledatasources.model.cardholder.CardHolder;
+import com.hendisantika.springbootmultipledatasources.model.member.Member;
 import com.hendisantika.springbootmultipledatasources.repository.card.CardRepository;
 import com.hendisantika.springbootmultipledatasources.repository.cardholder.CardHolderRepository;
 import com.hendisantika.springbootmultipledatasources.repository.member.MemberRepository;
@@ -51,5 +52,15 @@ public class AllController {
     @GetMapping("/cardholder")
     public List<CardHolder> getAllCardHolders() {
         return cardHolderRepository.findAll();
+    }
+
+    @PostMapping("/member")
+    public Member addNewMember(@RequestBody @Valid Member member) {
+        return memberRepository.save(member);
+    }
+
+    @GetMapping("/member")
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
     }
 }
