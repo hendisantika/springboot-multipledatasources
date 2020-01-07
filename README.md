@@ -6,6 +6,32 @@
 3. Run the application: `mvn clean spring-boot:run`
 4. Open REST API Client tool such as [POSTMAN](https://www.getpostman.com/) .
 
+## Screen shot
+
+**Add New Member**
+
+![Add New Member](img/newMember.png "Add New Member")
+
+**Get All Members**
+
+![Get All Members](img/allMembers.png "Get All Members")
+
+**Add New Card**
+
+![Add New Card](img/newCard.png "Add New Card")
+
+**Get All Carda**
+
+![Get All Card](img/allCards.png "Get All Card")
+
+**Add New Card Holder**
+
+![Add New Card Holder](img/newCardHolder.png "Add New Card Holder")
+
+**Get All Card Holders**
+
+![Get All Card Holders](img/allCardHolders.png "Get All Card Holders")
+
 ## Conclusion
 When dealing with just one datasource and Spring Boot, data source configuration is simple. Spring Boot can provide a lot of auto configuration.
 
