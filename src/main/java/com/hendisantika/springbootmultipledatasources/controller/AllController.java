@@ -5,8 +5,10 @@ import com.hendisantika.springbootmultipledatasources.repository.card.CardReposi
 import com.hendisantika.springbootmultipledatasources.repository.cardholder.CardHolderRepository;
 import com.hendisantika.springbootmultipledatasources.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,4 +31,14 @@ public class AllController {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @PostMapping("/card")
+    public Card addNewCard(@RequestBody @Valid Card card) {
+        return cardRepository.save(card);
+    }
+
+    @GetMapping("/card")
+    public List<Card> getAllCards() {
+        return cardRepository.findAll();
+    }
 }
