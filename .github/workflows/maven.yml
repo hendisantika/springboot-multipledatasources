@@ -47,6 +47,22 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Cache Maven wrapper distribution
+        uses: actions/cache@v6
+        with:
+          path: ~/.m2/wrapper
+          key: maven-wrapper-${{ runner.os }}-${{ hashFiles('.mvn/wrapper/maven-wrapper.properties') }}
+
+      # The wrapper download from Maven Central is occasionally flaky on hosted runners, so retry it
+      - name: Download Maven via wrapper (with retry)
+        run: |
+          for i in 1 2 3 4 5; do
+            ./mvnw -B -ntp --version && exit 0
+            echo "Maven wrapper download failed (attempt $i), retrying in $((i * 10))s..."
+            sleep $((i * 10))
+          done
+          exit 1
+
       - name: Build & test with Maven
         run: ./mvnw -B -ntp clean verify
 
