@@ -6,20 +6,17 @@ import com.hendisantika.springbootmultipledatasources.model.member.Member;
 import com.hendisantika.springbootmultipledatasources.repository.card.CardRepository;
 import com.hendisantika.springbootmultipledatasources.repository.cardholder.CardHolderRepository;
 import com.hendisantika.springbootmultipledatasources.repository.member.MemberRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringbootMultipledatasourcesApplicationTests {
+class SpringbootMultipledatasourcesApplicationTests {
 
     /*
      * We will be using mysql databases we configured in our properties file for our tests
@@ -39,8 +36,8 @@ public class SpringbootMultipledatasourcesApplicationTests {
     private Card card;
     private CardHolder cardHolder;
 
-    @Before
-    public void initializeDataObjects() {
+    @BeforeEach
+    void initializeDataObjects() {
 
         member = new Member();
         member.setMemberId("M001");
@@ -51,28 +48,28 @@ public class SpringbootMultipledatasourcesApplicationTests {
         cardHolder.setMemberId(member.getMemberId());
 
         card = new Card();
-        card.setExpirationMonth(01);
+        card.setExpirationMonth(1);
         card.setExpirationYear(2020);
         card.setName(member.getName());
 
     }
 
     @Test
-    public void shouldSaveMemberToMemberDB() {
+    void shouldSaveMemberToMemberDB() {
         Member savedMember = memberRepository.save(member);
         Optional<Member> memberFromDb = memberRepository.findById(savedMember.getId());
         assertTrue(memberFromDb.isPresent());
     }
 
     @Test
-    public void shouldSaveCardHolderToCardHolderDB() {
+    void shouldSaveCardHolderToCardHolderDB() {
         CardHolder savedCardHolder = cardHolderRepository.save(cardHolder);
         Optional<CardHolder> cardHolderFromDb = cardHolderRepository.findById(savedCardHolder.getId());
         assertTrue(cardHolderFromDb.isPresent());
     }
 
     @Test
-    public void shouldSaveCardToCardDB() {
+    void shouldSaveCardToCardDB() {
         Card savedCard = cardRepository.save(card);
         Optional<Card> cardFromDb = cardRepository.findById(savedCard.getId());
         assertTrue(cardFromDb.isPresent());
